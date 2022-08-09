@@ -1,9 +1,8 @@
 {
-	"type": "module",
   "name": "pupper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "source",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

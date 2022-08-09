@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,20 +7,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const puppeteer_extra_1 = __importDefault(require("puppeteer-extra"));
-const puppeteer_extra_plugin_stealth_1 = __importDefault(require("puppeteer-extra-plugin-stealth"));
-puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_stealth_1.default)());
-function getBrowser() {
+import puppeteer from "puppeteer-extra";
+import StealthPlugin from "puppeteer-extra-plugin-stealth";
+puppeteer.use(StealthPlugin());
+export default function getBrowser() {
     return __awaiter(this, void 0, void 0, function* () {
-        let browser = yield puppeteer_extra_1.default.launch({
+        let browser = yield puppeteer.launch({
             headless: false,
         });
         let page = (yield browser.pages())[0];
         return [browser, page];
     });
 }
-exports.default = getBrowser;

@@ -21,3 +21,5 @@ export default async function getBrowser(
   let page = (await browser.pages())[0];
   return [browser, page];
 }
+
+export { Browser, Page };

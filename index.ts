@@ -1,4 +1,4 @@
-import { Browser, Page } from "puppeteer";
+import { Browser, ElementHandle, Page } from "puppeteer";
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
@@ -20,6 +20,10 @@ export default async function getBrowser(
 
   let page = (await browser.pages())[0];
   return [browser, page];
+}
+
+export async function getText(page: Page, element: ElementHandle<Element>) {
+  return await page.evaluate((el) => el.textContent, element);
 }
 
 export { Browser, Page };

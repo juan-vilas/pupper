@@ -4,9 +4,9 @@ import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
 puppeteer.use(StealthPlugin());
 
-export default async function getBrowser({
-  browserURL = undefined,
-} = {}): Promise<[Browser, Page]> {
+export default async function getBrowser(
+  { browserURL }: { browserURL: string | undefined } = { browserURL: undefined }
+): Promise<[Browser, Page]> {
   let browser;
   let config: any = { defaultViewport: null };
 

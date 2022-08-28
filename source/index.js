@@ -15,11 +15,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const puppeteer_extra_1 = __importDefault(require("puppeteer-extra"));
 const puppeteer_extra_plugin_stealth_1 = __importDefault(require("puppeteer-extra-plugin-stealth"));
 puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_stealth_1.default)());
-function getBrowser() {
+function getBrowser({ browserURL = undefined, } = {}) {
     return __awaiter(this, void 0, void 0, function* () {
-        let browser = yield puppeteer_extra_1.default.launch({
-            headless: false,
-        });
+        let browser;
+        let config = { defaultViewport: null };
+        if (browserURL) {
+            config.browserURL = browserURL;
+            browser = yield puppeteer_extra_1.default.connect(config);
+        }
+        else {
+            config.headless = false;
+            browser = yield puppeteer_extra_1.default.launch(config);
+        }
         let page = (yield browser.pages())[0];
         return [browser, page];
     });

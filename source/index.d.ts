@@ -1,2 +1,4 @@
 import { Browser, Page } from "puppeteer";
-export default function getBrowser(): Promise<[Browser, Page]>;
+export default function getBrowser({ browserURL, }?: {
+    browserURL?: undefined;
+}): Promise<[Browser, Page]>;

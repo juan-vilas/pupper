@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const puppeteer_extra_1 = __importDefault(require("puppeteer-extra"));
 const puppeteer_extra_plugin_stealth_1 = __importDefault(require("puppeteer-extra-plugin-stealth"));
 puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_stealth_1.default)());
-function getBrowser({ browserURL = undefined, } = {}) {
+function getBrowser({ browserURL } = { browserURL: undefined }) {
     return __awaiter(this, void 0, void 0, function* () {
         let browser;
         let config = { defaultViewport: null };

@@ -28,7 +28,16 @@ export async function getText(page: Page, element: ElementHandle<Element>) {
 }
 
 export async function wait(miliseconds: number) {
+  console.log(`Waiting ${miliseconds} ms`);
   await _page.waitForTimeout(miliseconds);
+}
+
+export async function getProperty(
+  page: Page,
+  element: ElementHandle<Element>,
+  attribute: string
+) {
+  return await page.evaluate((el) => el.getAttribute(attribute), element);
 }
 
 export { Browser, Page };

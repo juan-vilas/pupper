@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Page = exports.Browser = exports.getText = void 0;
+exports.Page = exports.Browser = exports.getText = exports.getBrowser = void 0;
 const puppeteer_1 = require("puppeteer");
 Object.defineProperty(exports, "Browser", { enumerable: true, get: function () { return puppeteer_1.Browser; } });
 Object.defineProperty(exports, "Page", { enumerable: true, get: function () { return puppeteer_1.Page; } });
@@ -35,7 +35,7 @@ function getBrowser({ browserURL } = { browserURL: undefined }) {
         return [browser, page];
     });
 }
-exports.default = getBrowser;
+exports.getBrowser = getBrowser;
 function getText(page, element) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield page.evaluate((el) => el.textContent, element);

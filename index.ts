@@ -4,26 +4,31 @@ import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
 puppeteer.use(StealthPlugin());
 
+let _browser: Browser, _page: Page;
+
 export async function getBrowser(
   { browserURL }: { browserURL: string | undefined } = { browserURL: undefined }
 ): Promise<[Browser, Page]> {
-  let browser;
   let config: any = { defaultViewport: null };
 
   if (browserURL) {
     config.browserURL = browserURL;
-    browser = await puppeteer.connect(config);
+    _browser = await puppeteer.connect(config);
   } else {
     config.headless = false;
-    browser = await puppeteer.launch(config);
+    _browser = await puppeteer.launch(config);
   }
 
-  let page = (await browser.pages())[0];
-  return [browser, page];
+  _page = (await _browser.pages())[0];
+  return [_browser, _page];
 }
 
 export async function getText(page: Page, element: ElementHandle<Element>) {
   return await page.evaluate((el) => el.textContent, element);
+}
+
+export async function wait(miliseconds: number) {
+  await _page.waitForTimeout(miliseconds);
 }
 
 export { Browser, Page };

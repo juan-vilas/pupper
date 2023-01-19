@@ -12,27 +12,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Page = exports.Browser = exports.getText = exports.getBrowser = void 0;
+exports.Page = exports.Browser = exports.wait = exports.getText = exports.getBrowser = void 0;
 const puppeteer_1 = require("puppeteer");
 Object.defineProperty(exports, "Browser", { enumerable: true, get: function () { return puppeteer_1.Browser; } });
 Object.defineProperty(exports, "Page", { enumerable: true, get: function () { return puppeteer_1.Page; } });
 const puppeteer_extra_1 = __importDefault(require("puppeteer-extra"));
 const puppeteer_extra_plugin_stealth_1 = __importDefault(require("puppeteer-extra-plugin-stealth"));
 puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_stealth_1.default)());
+let _browser, _page;
 function getBrowser({ browserURL } = { browserURL: undefined }) {
     return __awaiter(this, void 0, void 0, function* () {
-        let browser;
         let config = { defaultViewport: null };
         if (browserURL) {
             config.browserURL = browserURL;
-            browser = yield puppeteer_extra_1.default.connect(config);
+            _browser = yield puppeteer_extra_1.default.connect(config);
         }
         else {
             config.headless = false;
-            browser = yield puppeteer_extra_1.default.launch(config);
+            _browser = yield puppeteer_extra_1.default.launch(config);
         }
-        let page = (yield browser.pages())[0];
-        return [browser, page];
+        _page = (yield _browser.pages())[0];
+        return [_browser, _page];
     });
 }
 exports.getBrowser = getBrowser;
@@ -42,3 +42,9 @@ function getText(page, element) {
     });
 }
 exports.getText = getText;
+function wait(miliseconds) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield _page.waitForTimeout(miliseconds);
+    });
+}
+exports.wait = wait;

@@ -51,7 +51,9 @@ function wait(miliseconds) {
 exports.wait = wait;
 function getProperty(page, element, attribute) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield page.evaluate((el) => el.getAttribute(attribute), element);
+        return yield page.evaluate((el, attr) => {
+            return el.getAttribute(attr);
+        }, element, attribute);
     });
 }
 exports.getProperty = getProperty;

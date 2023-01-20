@@ -37,7 +37,13 @@ export async function getProperty(
   element: ElementHandle<Element>,
   attribute: string
 ) {
-  return await page.evaluate((el) => el.getAttribute(attribute), element);
+  return await page.evaluate(
+    (el: any, attr: string) => {
+      return el.getAttribute(attr);
+    },
+    element,
+    attribute
+  );
 }
 
 export { Browser, Page };

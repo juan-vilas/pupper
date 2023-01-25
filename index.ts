@@ -27,9 +27,22 @@ export async function getText(page: Page, element: ElementHandle<Element>) {
   return await page.evaluate((el) => el.textContent, element);
 }
 
-export async function wait(miliseconds: number) {
-  console.log(`Waiting ${miliseconds} ms`);
-  await _page.waitForTimeout(miliseconds);
+export async function wait(
+  page: Page,
+  miliseconds: number,
+  margin: number = 3000
+) {
+  let waitThis = randomIntFromInterval(
+    miliseconds - margin,
+    miliseconds + margin
+  );
+  console.log(`Waiting ${waitThis} ms`);
+  await page.waitForTimeout(waitThis);
+}
+
+function randomIntFromInterval(min: number, max: number) {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export async function getProperty(

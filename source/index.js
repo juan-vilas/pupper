@@ -42,13 +42,18 @@ function getText(page, element) {
     });
 }
 exports.getText = getText;
-function wait(miliseconds) {
+function wait(page, miliseconds, margin = 3000) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(`Waiting ${miliseconds} ms`);
-        yield _page.waitForTimeout(miliseconds);
+        let waitThis = randomIntFromInterval(miliseconds - margin, miliseconds + margin);
+        console.log(`Waiting ${waitThis} ms`);
+        yield page.waitForTimeout(waitThis);
     });
 }
 exports.wait = wait;
+function randomIntFromInterval(min, max) {
+    // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 function getProperty(page, element, attribute) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield page.evaluate((el, attr) => {
